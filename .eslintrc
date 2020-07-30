@@ -24,7 +24,7 @@
   "settings": {
     "import/resolver": {
       "alias": {
-        "map": [["@src", "./"]],
+        "map": [["@src", "./src"]],
         "extensions": [".js", ".jsx"]
       },
       "node": {
