@@ -1,18 +1,107 @@
 /* Resets */
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+/* Variables */
+
+:root {
+  --dark: #223;
+  --light: white;
 }
 
 /* Styles */
+
+body {
+  font-family: Manrope, sans-serif;
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+header {
+  text-align: center;
+  margin: 2em;
+  font-size: 2rem;
+}
+
+.flashcard-list {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 0 1rem;
+}
+
+.flashcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: var(--light);
+  color: var(--dark);
+  height: 200px;
+  width: 200px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: transform 300ms;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0));
+  transform-style: preserve-3d;
+}
+
+.flashcard .front,
+.flashcard .back {
+  position: absolute;
+  padding: 1rem;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flashcard .back {
+  transform: rotateY(180deg);
+}
+
+.flashcard.flip {
+  --rotate-y: 180deg;
+}
+
+.flashcard:hover,
+.flashcard:focus {
+  border: 0.2em solid rgb(101, 65, 134);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.322);
+}
+
+.flashcard:focus {
+  outline-width: 0;
+}
+
+.flashcard .options {
+  margin-top: 0.5rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.flashcard .option {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
