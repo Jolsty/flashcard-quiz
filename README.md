@@ -1,12 +1,12 @@
-# React Template
+# Flashcard quiz
 
-React Template with Webpack, Babel, ESLint and Prettier (doesn't use CRA).
+This is a simple flashcard quiz app based on React.
 
 # Notes
 
-This template was developed by [Andrei Ciulpan](https://github.com/Jolsty) as a free React template (for anyone that doesn't want to use CRA).
+This app was created from my own React [template](https://github.com/Jolsty/react-template).
 
-It was developed and tested on `node (12.18.2)` with `npm (6.14.5)`. You can update them at any time.
+It was developed and tested on `node (12.18.2)` with `npm (6.14.5)`.
 
 # How to run
 
