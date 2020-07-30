@@ -1,0 +1,85 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "plugins": ["prettier", "import", "jsx-a11y", "react-hooks", "promise"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:promise/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@src", "./"]],
+        "extensions": [".js", ".jsx"]
+      },
+      "node": {
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    },
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-eval": "error",
+    "no-trailing-spaces": "error",
+    "eol-last": ["error", "always"],
+    "prettier/prettier": ["error"],
+    "react/jsx-fragments": ["error", "element"],
+    "react/jsx-max-props-per-line": ["error", { "maximum": 5, "when": "multiline" }],
+    "react/prop-types": ["error", { "ignore": ["Component", "router", "pageProps"] }],
+    "react/jsx-props-no-spreading": [
+      "error",
+      {
+        "html": "enforce",
+        "custom": "enforce",
+        "exceptions": ["Component"]
+      }
+    ],
+    "react/boolean-prop-naming": [
+      "error",
+      {
+        "propTypeNames": ["bool", "mutuallyExclusiveTrueProps"],
+        "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+",
+        "message": "It is better if your prop ({{ propName }}) matches this pattern: ({{ pattern }})"
+      }
+    ],
+    "import/no-commonjs": "error",
+    "import/first": "error",
+    "import/no-duplicates": "error",
+    "import/extensions": ["error", "ignorePackages", { "js": "never", "jsx": "never" }],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always-and-inside-groups",
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
+      }
+    ],
+    "import/no-named-default": "error",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["route"],
+        "aspects": ["preferButton"]
+      }
+    ]
+  }
+}
