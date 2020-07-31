@@ -24,6 +24,7 @@ html {
 :root {
   --dark: #223;
   --light: white;
+  --grey: #e0dcff;
 }
 
 /* Styles */
@@ -36,46 +37,35 @@ body {
 
 header {
   text-align: center;
-  margin: 2em;
-  font-size: 2rem;
+  margin: 2em 0;
+  font-size: 1.5rem;
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .flashcard-list {
   display: grid;
-  align-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 0 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+  grid-auto-rows: auto;
+  gap: 2rem;
 }
 
 .flashcard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  font-size: 0.9rem;
   background-color: var(--light);
   color: var(--dark);
-  height: 200px;
-  width: 200px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.3);
   position: relative;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: transform 300ms;
-  transform: perspective(1000px) rotateY(var(--rotate-y, 0));
+  transform: rotateY(var(--rotate-y, 0));
   transform-style: preserve-3d;
-}
-
-.flashcard .front,
-.flashcard .back {
-  position: absolute;
-  padding: 1rem;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flashcard .back {
-  transform: rotateY(180deg);
+  perspective: 1000px;
+  height: 30em;
 }
 
 .flashcard.flip {
@@ -84,24 +74,66 @@ header {
 
 .flashcard:hover,
 .flashcard:focus {
-  border: 0.2em solid rgb(101, 65, 134);
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.322);
+  background-color: var(--grey);
 }
 
 .flashcard:focus {
   outline-width: 0;
 }
 
-.flashcard .options {
-  margin-top: 0.5rem;
-  list-style: none;
+.flashcard .front,
+.flashcard .back {
+  position: absolute;
+  transform: rotateX(0deg);
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flashcard .front {
   display: flex;
+  flex-flow: column wrap;
+  padding: 1rem;
+}
+
+.flashcard .front .question {
+  padding: 0 1.5rem 1rem 0;
+}
+
+.flashcard .front .difficulty {
+  align-self: center;
+  margin: 2rem;
+  background-color: var(--dark);
+  padding: 0.5rem;
+  color: white;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.flashcard .back {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: rgb(5, 66, 5);
+  color: var(--light);
+  padding: 1rem;
+}
+
+.flashcard .options {
+  list-style: inside upper-alpha;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  justify-content: left;
+  font-size: 0.9rem;
 }
 
 .flashcard .option {
-  font-size: 0.85rem;
   margin-top: 0.5rem;
 }
