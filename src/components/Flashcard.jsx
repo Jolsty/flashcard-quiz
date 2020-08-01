@@ -1,21 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { outerHeight } from '@src/utils';
+
 import FlashcardPropTypes from '@src/prop-types/FlashcardPropTypes';
 
 export default function Flashcard({ flashcard }) {
+  const { question, answer, options, difficulty } = flashcard;
+
   const [flip, setFlip] = useState(false);
   const [height, setHeight] = useState('initial');
 
   const frontEl = useRef();
 
-  const handleFlipClick = () => setFlip(!flip);
-
   const setMaxHeight = () => {
-    const height = frontEl.current.getBoundingClientRect().height;
-    // Math.max(frontEl.current.getBoundingClientRect().height, '25em');
-    console.log('Log: setMaxHeight -> height', height);
-    // return '25rem';
+    const totalHeight = [...frontEl.current.children].reduce((acc, child) => acc + outerHeight(child), 35);
+
+    setHeight(totalHeight);
   };
+
+  useEffect(() => {
+    window.addEventListener('resize', setMaxHeight);
+
+    return () => window.removeEventListener('resize', setMaxHeight);
+  }, []);
+
+  useEffect(() => {
+    setMaxHeight();
+  }, [question, answer, options, difficulty]);
+
+  const handleFlipClick = () => setFlip(!flip);
 
   const handleFlipKeyboard = (e) => {
     if (e.key === 'Enter') {
@@ -23,24 +36,18 @@ export default function Flashcard({ flashcard }) {
     }
   };
 
-  useEffect(() => {
-    setHeight(setMaxHeight);
-  }, [frontEl]);
-
   if (!flashcard || Object.keys(flashcard).length === 0) {
     return null;
   }
 
-  const { question, answer, options, difficulty } = flashcard;
-
   return (
     <div
       className={`flashcard ${flip ? 'flip' : ''}`}
-      style={{ height }}
       onClick={handleFlipClick}
       role="button"
       tabIndex={0}
       onKeyDown={handleFlipKeyboard}
+      style={{ height }}
     >
       <div className="front" ref={frontEl}>
         <h3 className="question">{question}</h3>
